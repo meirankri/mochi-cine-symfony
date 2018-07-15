@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	{% if film is iterable %}
+ 	<div class="container">
+		<div class="row">
+		{% for film in film %}
+		<div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                
+                <div class="card-body">
+                  <p class="text-center">{{film.title}}</p>
+                 <p class="card-text">
+                    <img class="img-fluid" alt="" src="{{film.image}}" >
+                 </p>
+                 <strong>Synopsis:</strong>
+                  <p class="card-text ">{{film.synopsis}}</p>
+                  <strong>Genre:</strong>
+                  <p class="">{{film.category}}</p>
+
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href=" {{path('deleteMovie', {'id' :film.id})}} "><button type="button" class="delete btn btn-sm btn-outline-secondary">delete </button></a>
+                      
+                    </div>
+                     <a href=" {{path('suite', {'id': film.id })}} " class="text-white"><button class="btn btn-primary"> lire la suite </button></a>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+		{% endfor %}
+			</div>
+		</div>
+
+{% else %}
+<h1> {{film}} </h1>
+
+ {% endif %}
+{% endblock %}

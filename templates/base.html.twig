@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome to mochi-ciné!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+          <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+
+            
+    </head>
+    <body>
+    			<header>
+      				<div class="navbar navbar-dark bg-dark box-shadow fixed-top">
+				        <div class="container d-flex justify-content-between">
+				          <a href="{{path('show_film')}}" class="navbar-brand d-flex align-items-center">
+				           <strong>Mochi mochi ciné</strong>
+				          </a>
+                   
+				        </div>
+
+				      </div>
+   				</header>
+   		<section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Mochi mochi ciné</h1>
+          <p class="lead text-muted">Créé votre liste de film, supprimé les, recherché selon le titre ou la description</p>
+          <p>
+            <a href=" {{path('createFilm')}} " class="btn btn-primary my-2">Add a film</a>
+            <form action=" {{path('searchBar')}} " method="post">
+                    <input type="text" name="title" placeholder="par le titre ou description">
+                    <button type="submit" class="btn btn-primary" >recherche</button>
+                  </form>
+            <!--<a href="#" class="btn btn-info my-2">recherche par critère</a>-->
+          </p>
+        </div>
+      </section>
+
+       <div class="container">
+        {% block body %}{% endblock %}
+     </div>
+        {% block javascripts %}{% endblock %}
+  <style>
+    .help-block{
+      color:red;
+    }
+  </style>
+
+    </body>
+</html>

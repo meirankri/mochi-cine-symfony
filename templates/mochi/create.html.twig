@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+ 
+{% block body %}
+	<h1 class="text-center">ajouter un film</h1>
+
+	{{form_start(form)}}
+	<label for="">titre</label>
+		{{form_widget(form.title)}}
+	<label for="">synopsis</label>
+		{{form_widget(form.synopsis)}}
+	<label for="">pays</label>
+		{{form_widget(form.country)}}
+	<label for="">genre</label>
+		{{form_widget(form.category)}}
+	<label for="">image</label>
+		{{form_widget(form.image)}}
+		{{form_errors(form.image)}}
+	<div>
+	<button type="submit" class="btn btn-primary"> Enregistrez</button>
+	</div>
+	{{form_end(form)}}
+
+{% endblock %}
+{% block javascripts %}
+		
+
+
+{% endblock %}

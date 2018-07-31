@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% form_theme formNews 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block title %}créer un article{% endblock %}
+
+{% block body %}
+
+{% if edit %}
+	<h1>Modifier un article</h1>
+	
+	{% else %}
+		<h1>créer un article</h1>
+	
+	{% endif %}
+
+
+<label for="title">Titre</label>
+{{ form_start(formNews) }}
+	{{ form_widget(formNews.title) }}
+	<div class="error">
+	{{ form_errors(formNews.title) }}
+	</div>
+
+	<label for="contenue">contenue</label>
+	{{ form_widget(formNews.content) }}
+	<div class="error">
+		{{ form_errors(formNews.content) }}
+	</div>
+	
+
+
+	<label for="image">image</label>
+	{{ form_widget(formNews.image) }}
+	<div class="error">
+	{{ form_errors(formNews.image) }}	
+	</div>
+	<label for="">categorie</label>
+	<div>
+		{{form_widget(formNews.category)}}
+	</div>
+	<ul class="tags">
+	 
+            <li>{{ form_row(formNews.tags) }}</li>
+       
+     </ul>
+	{% if edit %}
+	<button class="btn btn-primary" type="submit">Modifier</button>
+	{% else %}
+	<button class="btn btn-primary" type="submit">Créer</button>
+	{% endif %}
+{{ form_end(formNews) }}
+{% endblock %}
+{% block javascripts %}
+	<script>/*
+		var $collectionHolder;
+
+		// setup an "add a tag" link
+		var $addTagButton = $('<button type="button" class="add_tag_link">Add a tag</button>');
+		var $newLinkLi = $('<li></li>').append($addTagButton);
+
+		jQuery(document).ready(function() {
+		    // Get the ul that holds the collection of tags
+		    $collectionHolder = $('ul.tags');
+
+		    // add the "add a tag" anchor and li to the tags ul
+		    $collectionHolder.append($newLinkLi);
+
+		    // count the current form inputs we have (e.g. 2), use that as the new
+		    // index when inserting a new item (e.g. 2)
+		    $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+		    $addTagButton.on('click', function(e) {
+		        // add a new tag form (see next code block)
+		        addTagForm($collectionHolder, $newLinkLi);
+    });
+});
+
+	</script>
+
+{% endblock %}

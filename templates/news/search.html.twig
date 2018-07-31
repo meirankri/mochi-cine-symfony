@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+ {% block body %}
+ 	{% if article is iterable %}
+ 	{% for article in article %}
+	<p>title {{article.id}} </p>
+	<img src="{{ article.image }}" alt="">
+	{{article.title}}
+	<p>contenue</p>
+	{{article.content}}
+{% endfor %}
+
+{% else %}
+
+	<h1> {{article}} </h1>
+ {% endif %}
+   {% endblock %}
+

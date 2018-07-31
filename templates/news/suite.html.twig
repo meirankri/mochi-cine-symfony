@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body%}
+<h1> {{article.title}} {{article.id}} </h1>
+{% if article.image starts with 'http' %}
+			<div><img src=" {{article.image}} " alt="" class="img img-fluid"></div>
+		    {% else %}
+		    <div><img src="{{ asset('uploads/images/' ~ article.image) }}" alt="" class="img img-fluid"></div>
+		    {% endif %}
+
+<p> {{article.content | raw}}</p>
+<div>ecris le {{article.CreatedAt | date('d/m/Y:H:i') }} </div> 
+<div>dans la categorie {{article.category.title}} </div>
+{% if article.tags is defined %}
+	<div>avec les tags
+	{{article.tags | join(', ')}}
+	{% endif %}
+</div>
+<a href="{{path('edit',{'id': article.id})}} ">modifiez</a>
+<a href="#" class="btn btn-danger" id="delete_article" data-id="{{ article.id }}">Supprimez</a>
+<div>
+	{% if app.user %}
+	<h2>écrire un commentaire</h2>
+	{{form_start(comment)}}
+	<label>auteur</label>
+	{{form_widget(comment.author)}}
+	<label>commentaire</label>
+	{{form_widget(comment.content)}}
+	<button type="submit" class="btn btn-primary">Postez</button>
+	{{form_end(comment)}}
+</div>
+{% else %}
+	Veuillez etre connecter pour laissez un commentaire <a href=" {{path('security_login')}} "> Connexion</a>
+	{% endif %}
+
+<section id="commentary">
+	<h1 class="text-center mb-4"> <!-- pour afficher le nombre de ligne-->{{ article.comments | length }} Commentaires</h1>
+	<hr>
+	{% for comment in article.comments %}
+	<div class="comment">
+		<div class="row">
+			<div class="col-3">
+				{{comment.author}} {{comment.createdAt | date('d/m/Y H:i')}}
+			</div>
+			<div class="col ">
+				{{comment.content | raw}}
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</section>
+
+{% endblock %}
+{% block javascripts %}
+	<script src="/js/main.js"></script>
+{% endblock %}
